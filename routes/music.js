@@ -1,15 +1,13 @@
 router = require('express').Router();
 
-router.get('/', function(req, res, next){
+const musicController = require('../controllers/musicController');
 
-});
+router.get('/', musicController.getMusics);
 
-router.get('/:id', function(req, res, next){
+router.get('/:id', musicController.getMusic);
 
-});
+router.post('/', musicController.createMusic);
 
-router.post('/', function(req, res, next){});
+router.put('/:id', musicController.updateMusic);
 
-router.put('/:id', function(req, res, next){});
-
-router.delete('/:id', function(req, res, next){});
+router.delete('/:id', musicController.deleteMusic);
