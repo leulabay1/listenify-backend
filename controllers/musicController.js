@@ -23,8 +23,9 @@ const getMusic = async function(req, res, next) {
 const createMusic = async function(req, res, next) {
 
   try{
-    const music = Music.create(req.body);
+    const music = await Music.create(req.body)
     res.send(music);
+
   } catch (error) {
     res.status(400).send({message: error.message});
   }
@@ -34,6 +35,8 @@ const updateMusic = async function(req, res, next) {
 
   try{
     const music = await Music.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    res.send(music)
+
   } catch(error){
     res.status(400).send({message: error.message});
   }
