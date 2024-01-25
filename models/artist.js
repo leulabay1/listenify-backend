@@ -16,11 +16,7 @@ const artistSchema = new mongoose.Schema({
   followers: {
     type: Number,
     required: true
-  },
-  genres: {
-    type: [String],
-    default: []
-  },
+  }
 });
 
 module.exports = artistSchema;

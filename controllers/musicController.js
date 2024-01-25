@@ -34,6 +34,7 @@ const createMusic = async function(req, res, next) {
 const updateMusic = async function(req, res, next) {
 
   try{
+    console.log(req.body)
     const music = await Music.findByIdAndUpdate(req.params.id, req.body, {new: true});
     res.send(music)
 
