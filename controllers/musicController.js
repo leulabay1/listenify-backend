@@ -1,5 +1,5 @@
 //controllers of music
-Music = require('../models/music');
+Music = require('../models/newMusic');
 
 const getMusics = async function(req, res, next) {
   try{
@@ -23,7 +23,7 @@ const getMusic = async function(req, res, next) {
 const createMusic = async function(req, res, next) {
 
   try{
-    const music = await Music.create(req.body)
+    const music = await Music.create(req.body);
     res.send(music);
 
   } catch (error) {
@@ -34,7 +34,6 @@ const createMusic = async function(req, res, next) {
 const updateMusic = async function(req, res, next) {
 
   try{
-    console.log(req.body)
     const music = await Music.findByIdAndUpdate(req.params.id, req.body, {new: true});
     res.send(music)
 
@@ -53,10 +52,19 @@ const deleteMusic = async function(req, res, next) {
   }
 };
 
+const searchMusic = async function(req, res, next){
+  try{
+    const music = await Music.find({ title: { $regex: new RegExp(req.body.term, 'i') } })
+  }catch (e) {
+    res.status(500).send({message: e.message})
+  }
+}
+
 module.exports = {
   getMusics,
   getMusic,
   createMusic,
   updateMusic,
-  deleteMusic
+  deleteMusic,
+  searchMusic
 };
